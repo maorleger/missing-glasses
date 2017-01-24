@@ -6,50 +6,58 @@ import ClientTypes exposing (..)
 
 scenes : List ( Id, List ( Id, Engine.Rule, Narration ) )
 scenes =
-    [ ( "learnOfMystery", learnOfMystery )
-    , ( "searchForMarbles", searchForMarbles )
-    , ( "bringMarbleHome", bringMarbleHome )
-    , ( "bringMarbleHome", bringMarbleHome )
-    , ( "goToPub", goToPub )
+    [ ( "startSearch", startSearch )
+    , ( "goToHotelRoom", goToHotelRoom )
+    , ( "goToConferenceRoom", goToConferenceRoom )
+    , ( "askJeff", askJeff )
     ]
 
 
-learnOfMystery : List ( Id, Engine.Rule, Narration )
-learnOfMystery =
+
+-- [ ( "learnOfMystery", learnOfMystery )
+-- , ( "searchForMarbles", searchForMarbles )
+-- , ( "bringMarbleHome", bringMarbleHome )
+-- , ( "bringMarbleHome", bringMarbleHome )
+-- , ( "goToPub", goToPub )
+-- ]
+
+
+askJeff : List ( Id, Engine.Rule, Narration )
+askJeff =
     []
-        ++ ( "get note from harry"
-           , { interaction = withCharacter "Harry"
-             , conditions = [ currentLocationIs "Garden" ]
+
+
+goToConferenceRoom : List ( Id, Engine.Rule, Narration )
+goToConferenceRoom =
+    []
+
+
+goToHotelRoom : List ( Id, Engine.Rule, Narration )
+goToHotelRoom =
+    []
+        ++ ( "go to room"
+           , { interaction = withLocation "Room"
+             , conditions = []
              , changes =
-                [ moveCharacterToLocation "Harry" "Marsh"
-                , moveItemToInventory "NoteFromHarry"
+                [ moveCharacterToLocation "Jeff" "ConferenceRoom"
                 ]
              }
            , [ harryGivesNote ]
            )
-        :: ( "read harry's note"
-           , { interaction = withItem "NoteFromHarry"
+        :: []
+
+
+startSearch : List ( Id, Engine.Rule, Narration )
+startSearch =
+    []
+        ++ ( "start search in hotel room"
+           , { interaction = withCharacter "Jeff"
              , conditions = []
-             , changes = [ addLocation "Marsh" ]
-             }
-           , noteFromHarry
-           )
-        :: ( "go to marsh"
-           , { interaction = withLocation "Marsh"
-             , conditions = [ itemIsInInventory "NoteFromHarry" ]
              , changes =
-                [ moveTo "Marsh"
-                , moveItemOffScreen "NoteFromHarry"
+                [ moveCharacterToLocation "Jeff" "ConferenceRoom"
                 ]
              }
-           , []
-           )
-        :: ( "harry asks for help"
-           , { interaction = withCharacter "Harry"
-             , conditions = [ currentLocationIs "Marsh" ]
-             , changes = [ loadScene "searchForMarbles" ]
-             }
-           , [ harryAsksForHelp ]
+           , [ jeffGetsInstructions ]
            )
         :: []
 
@@ -307,6 +315,17 @@ What's this?  He's given me a note.  And now he's run off.
 
 How peculiar.
 """
+
+
+jeffGetsInstructions : String
+jeffGetsInstructions =
+    """
+    Jeff, can you go to conference room and look for my glasses?
+
+    Jeff seems confused, as though he's deep in thought.
+
+    I bet it's the monorepo again...
+  """
 
 
 noteFromHarry : List String

@@ -50,14 +50,12 @@ init =
                 , characters = stripAttributes characters
                 }
                 (stripNarration scenes)
-                [ moveItemToLocation "Umbrella" "Home"
-                , moveItemToLocationFixed "VegatableGarden" "Garden"
-                , addLocation "Home"
-                , addLocation "Garden"
-                , moveCharacterToLocation "Harry" "Garden"
-                , moveItemToLocation "Pint" "Pub"
-                , moveTo "Home"
-                , loadScene "learnOfMystery"
+                [ moveItemToLocation "Glasses" "ConferenceRoom"
+                , addLocation "ConferenceRoom"
+                , addLocation "Room"
+                , moveCharacterToLocation "Jeff" "Room"
+                , moveTo "Room"
+                , loadScene "startSearch"
                 ]
       , route = TitlePage
       , loaded = False
