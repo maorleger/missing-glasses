@@ -30,6 +30,15 @@ askJeff =
 goToConferenceRoom : List ( Id, Engine.Rule, Narration )
 goToConferenceRoom =
     []
+      ++ ( "go to conference room"
+      , { interaction = withLocation "ConferenceRoom"
+      , conditions = []
+      , changes = 
+        [ moveCharacterToLocation "Jeff" "Room"
+        ]
+        }
+        , jeffMovesToRoom
+        ) :: []
 
 
 goToHotelRoom : List ( Id, Engine.Rule, Narration )
@@ -411,3 +420,11 @@ greenMarble =
     , "Harry will definitely be happy I found it!"
     , "I should go show Harry."
     ]
+
+jeffMovesToRoom : List String
+jeffMovesToRoom = 
+  [ "Jeff is going back to my room, lets see what he says"
+  , "Jeff has gone back"
+  , "Where the hell is he?"
+  ]
+
